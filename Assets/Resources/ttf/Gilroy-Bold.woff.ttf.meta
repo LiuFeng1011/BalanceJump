@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 7db7029f7b42547b48b7016f6ab95028
+timeCreated: 1524063940
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Gilroy-Bold
+  fontNames:
+  - Gilroy-Bold
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
