@@ -106,10 +106,10 @@ public class InGameUIManager : BaseGameObject {
                 label.Init(pos, scores);
                 label.transform.position = pos;
             }else {
-                labelObj = NGUITools.AddChild(uiroot, addScoresLabelRes);
-                AddScoresLabel label = labelObj.GetComponent<AddScoresLabel>();
-                label.Init(pos, scores);
-                label.transform.position = pos;
+                //labelObj = NGUITools.AddChild(uiroot, addScoresLabelRes);
+                //AddScoresLabel label = labelObj.GetComponent<AddScoresLabel>();
+                //label.Init(pos, scores);
+                //label.transform.position = pos;
             }
             //GameObject labelObj = MonoBehaviour.Instantiate(addScoresLabelRes);
         }

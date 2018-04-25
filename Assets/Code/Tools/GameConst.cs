@@ -93,7 +93,7 @@ public static class GameConst  {
     public const int MAP_WIDTH = 8;
     public const float MAP_OBJ_MAX_POSX = 3;
 
-    public const float GAME_STEP_INTERVAL = 3;
+    public const float GAME_STEP_INTERVAL = 4;
 
     public const float comboDis = 0.3f;
     public const int timeModelTime = 60;

@@ -16,7 +16,7 @@ public class TeachLayer : MonoBehaviour {
 	}
 
     public void TouchCB(GameObject go){
-        InGameManager.GetInstance().ChangeState(enGameState.playing);
+        InGameManager.GetInstance().StartGame();
         Destroy(gameObject);
     }
 }

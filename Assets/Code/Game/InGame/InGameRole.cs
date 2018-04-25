@@ -6,14 +6,20 @@ public class InGameRole : InGameBaseObj {
 
     public float validTouchDistance; //200  
 
-    float updateTime = 0f, updateInterval = 0.03f, gravity = 0.008f;
+    float updateTime = 0f, updateInterval = 0.03f, gravity = 0.008f, jumpActionTime = 0f,maxJumpActionTime = 1f;
+
+    float baseScaleX = 0.5f;
+
     public int combo = 0,scores = 0;
     Vector3 moveForce,cameraBasePos;
 
     float targetz =0 ;
 
+    public AnimationCurve jumpAC;
+
     private void Awake()
     {
+        baseScaleX = transform.localScale.x;
     }
 
     public override void Init()
@@ -36,7 +42,6 @@ public class InGameRole : InGameBaseObj {
 	public void RoleUpdate () {
         if (!gameObject.activeSelf) return;
 
-
         updateTime += Time.deltaTime;
 
         while (updateTime > updateInterval)
@@ -50,24 +55,40 @@ public class InGameRole : InGameBaseObj {
             transform.position += new Vector3(0, 0, (targetz - transform.position.z) * 0.1f);
         }
 
+        if(jumpActionTime >0 ){
+            jumpActionTime -= Time.deltaTime;
+            float rate = jumpAC.Evaluate(1f - jumpActionTime / maxJumpActionTime);
+            transform.localScale = new Vector3(baseScaleX * rate,transform.localScale.y, baseScaleX * rate);
+        }
+
         Vector3 camerapos = InGameManager.GetInstance().gamecamera.transform.position;
         camerapos.z = cameraBasePos.z + transform.position.z;
 
         InGameManager.GetInstance().gamecamera.transform.position = camerapos;
 
-        if(transform.position.y < -5){
+        if(transform.position.y < -6){
             Die();
         }
 	}
 
-    public void AddScore(){
-        scores++;
-        InGameManager.GetInstance().inGameUIManager.AddScores(transform.position,1,scores,true);
+    public void AddScore(bool iscombo){
+        int addscore = 1;
+        if(iscombo){
+            combo++;
+            addscore += combo;
+        }else {
+            combo = 0;
+        }
+
+        scores += addscore;
+        InGameManager.GetInstance().inGameUIManager.AddScores(transform.position,addscore,scores,iscombo);
     }
 
     public void Jump(Vector3 vec){
+        jumpActionTime = maxJumpActionTime;
         targetz += GameConst.GAME_STEP_INTERVAL;
         moveForce = vec * 0.2f;
+        transform.forward = vec;
     }
 
     public void Die(){
@@ -86,7 +107,11 @@ public class InGameRole : InGameBaseObj {
     {
         InGameStep step = other.gameObject.transform.parent.gameObject.GetComponent<InGameStep>();
         if(step == null){
-            Debug.Log( "step == null!!!!");
+            if(other.gameObject.name == "Wave"){
+                Die();
+            }else{
+                Debug.Log("OnTriggerEnter Other");
+            }
             return;
         }
         if(step.IsDie()){
@@ -97,7 +122,13 @@ public class InGameRole : InGameBaseObj {
         vec.z = 0;
         Jump(vec);
 
-        AddScore();
+
+        AddScore(Mathf.Abs(step.transform.position.x - transform.position.x) < 0.5f);
+
+
+        GameObject effect = Resources.Load("Prefabs/Effect/RoleHitEffect") as GameObject;
+        effect = Instantiate(effect);
+        effect.transform.position = transform.position;
     }
 
     public void Revive(){

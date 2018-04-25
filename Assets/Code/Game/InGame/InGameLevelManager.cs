@@ -19,7 +19,8 @@ public class InGameLevelManager : BaseGameObject {
                               EventID.EVENT_TOUCH_DOWN, EventID.EVENT_TOUCH_MOVE);
         addCount = (int)(GameConst.GAME_STEP_INTERVAL * 10);
 
-        for (int i = 0; i < 2; i++){
+        addStepDis += GameConst.GAME_STEP_INTERVAL;
+        for (int i = 0; i < 1; i++){
             InGameBaseObj obj = AddObj(InGameBaseObj.enObjType.step);
 
             obj.transform.position = new Vector3(0, 0, addStepDis);
@@ -29,7 +30,7 @@ public class InGameLevelManager : BaseGameObject {
 
             step.RandScale(4, 0);
         }
-
+        AddStepUpdate();
     }
 
     public void Update(){
@@ -88,7 +89,8 @@ public class InGameLevelManager : BaseGameObject {
 
             InGameStep step = (InGameStep)obj;
 
-            step.RandScale(Random.Range(1f, 4f),-3 + Random.Range(0f, 6f));
+            step.RandScale(Random.Range(2f - InGameManager.GetInstance().gameScale, 5f - InGameManager.GetInstance().gameScale),
+                           -3 + Random.Range(0f, 6f));
         }
 
     }

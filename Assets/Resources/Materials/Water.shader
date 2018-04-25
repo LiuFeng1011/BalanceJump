@@ -53,9 +53,9 @@
                 float d2 = tex2Dlod(_MainTex,float4(v.texcoord.xy,0,0)).r * 3;
 
                 //float sinx = sin(_Frequency * _Time.y + v.vertex.x * _InvWaveLength + v.vertex.y * _InvWaveLength + v.vertex.z * _InvWaveLength);  
-                offset.y = sin((d2) * (_Time.y + 100) * 1.5) * _InvWaveLength  + sin((_Time.y +(v.vertex.x + v.vertex.y) * 0.2) * 2)*0.5;  
-                //offset.x =  v.vertex.x + sin(_Time.y );  
-                //offset.z =  v.vertex.z + sin(_Time.y );  
+                offset.y = sin((d2) * (_Time.y + 100) * 1.5) * _InvWaveLength  + sin((_Time.y +(v.vertex.x + v.vertex.y) * 0.4) * 2)*1;  
+                offset.x =  v.vertex.x + sin(d2*_Time.y ) * 0.2;  
+                offset.z =  v.vertex.z + sin(d2*_Time.y ) * 0.2;  
                 if(v.texcoord.x == 0){
                     offset.y = -0.5;
                 }

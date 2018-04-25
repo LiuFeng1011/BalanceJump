@@ -53,13 +53,17 @@ public class InGameColorManager : BaseGameObject {
         float h, s, v;
         h = Mathf.Abs(Mathf.Sin(rand));
         s = 1f;
-        v = 0.5f;
+        v = 0.9f;
 
         objColor1   = Color.HSVToRGB(h, s, v);
 
         h += 0.5f;
-        objColor2   = Color.HSVToRGB(h - (int)h, s, v);
+        h = h - (int)h;
+        v = 0.5f;
+        objColor2   = Color.HSVToRGB(h, s, v);
 
+
+        bgColor = Color.HSVToRGB(h, s, 0.9f);
 
     }
 

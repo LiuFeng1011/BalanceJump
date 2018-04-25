@@ -10,6 +10,7 @@ public class CreateMesh : MonoBehaviour {
     MeshCollider mc;  
 	// Use this for initialization
 	void Awake () {
+        gameObject.name = "Wave";
         //meshHeight = meshWidth;
         mat = Resources.Load<Material>("Materials/Custom_Water");  
         mc = gameObject.AddComponent<MeshCollider>();  
@@ -19,7 +20,7 @@ public class CreateMesh : MonoBehaviour {
 
         DrawSquare();
 
-        transform.localPosition = new Vector3(-(meshWidth * transform.localScale.x) / 2, transform.localPosition.y, transform.localPosition.z);
+        transform.localPosition = new Vector3(-(meshWidth * transform.localScale.x) * 0.8f, transform.localPosition.y, transform.localPosition.z);
 	
 
         InGameColorManager colormanager = new InGameColorManager();
@@ -27,6 +28,8 @@ public class CreateMesh : MonoBehaviour {
 
         mat.SetColor("_Color", colormanager.objColor1);
         mat.SetColor("_BackColor", colormanager.objColor2);
+
+        Camera.main.backgroundColor = colormanager.bgColor;
     }
 	
 	// Update is called once per frame

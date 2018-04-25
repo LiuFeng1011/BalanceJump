@@ -80,9 +80,11 @@ public class InGameManager : MonoBehaviour {
         roleObj = Instantiate(roleObj);
         role = roleObj.GetComponent<InGameRole>();
         role.Init();
-        role.Jump(new Vector3(0f, 1f));
 
-        gameEffectManager = new GameEffectManager();
+        role.transform.position = new Vector3(0, 2f, 0);
+        //role.Jump(new Vector3(0f, 1f));
+
+        //gameEffectManager = new GameEffectManager();
 
         //
         inGameLevelManager = new InGameLevelManager();
@@ -98,15 +100,12 @@ public class InGameManager : MonoBehaviour {
         inGameColorManager = new InGameColorManager();
         inGameColorManager.Init();
 
-        gameState = enGameState.playing;
+        //gameState = enGameState.playing;
 
         int teachCount = PlayerPrefs.GetInt("teachcount", 0);
 
-        //if(teachCount < 2){
-        //    GameObject teachObj = Resources.Load("Prefabs/UI/TeachLayer") as GameObject;
-        //    teachObj = Instantiate(teachObj);
-        //    PlayerPrefs.SetInt("teachcount", teachCount+1);
-        //}
+        GameObject teachObj = Resources.Load("Prefabs/UI/TeachLayer") as GameObject;
+        teachObj = Instantiate(teachObj);
     }
 	
 	// Update is called once per frame
@@ -189,7 +188,10 @@ public class InGameManager : MonoBehaviour {
         }
         reviveCount += 1;
     }
-
+    public void StartGame(){
+        gameState = enGameState.playing;
+        role.Jump(new Vector3(0f, 1f));
+    }
     public void ChangeState(enGameState state){
         gameState = state;
     }
