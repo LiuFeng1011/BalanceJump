@@ -115,7 +115,7 @@ public class InGameLevelManager : BaseGameObject {
     }
 
     public void TouchMove(Vector3 pos){
-        float rate =  - (pos.x - Screen.width / 2) / 1000f;
+        float rate =  - (pos.x - Screen.width / 2) / 500f;
         if (rate > 1) rate = 1;
         if (rate < -1) rate = -1;
 

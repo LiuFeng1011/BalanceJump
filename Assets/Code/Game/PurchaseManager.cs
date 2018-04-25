@@ -25,7 +25,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
 
         ConfigurationBuilder builder = ConfigurationBuilder.Instance(module);
 
-        builder.AddProduct("TouchColorRemoveADS", ProductType.NonConsumable);
+        builder.AddProduct("BalanceJumpRemoveADS", ProductType.NonConsumable);
 
         UnityPurchasing.Initialize(this, builder);
 #endif
@@ -102,7 +102,7 @@ public class PurchaseManager : MonoBehaviour, IStoreListener
     }
     public void DoIapPurchase (Action<bool, string> callback) {  
         if (controller != null) {  
-            var product = controller.products.WithID ("TouchColorRemoveADS");  
+            var product = controller.products.WithID ("BalanceJumpRemoveADS");  
             if (product != null && product.availableToPurchase) {  
                 //调起支付  
                 controller.InitiatePurchase(product);  

@@ -57,6 +57,7 @@ public class ResultLayerManager : InGameUIBaseLayer {
     public void SetVal(int val){
 
         scoreLabel.text = val + "";
+
     }
 
     void ExitBtn(GameObject obj){

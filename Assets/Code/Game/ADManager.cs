@@ -9,9 +9,9 @@ using Together;
 
 public class ADManager {
 
-    public const string ADAPPID = "p4695meTd6G4kPwos6Sq";
-    public const string ADSCENEID_REVIVE = "jGlmALezm9SynjVYohb";
-    public const string ADSCENEID_GAMEOVER = "OehpVs6qQrin6BbMkmg";
+    public const string ADAPPID = "12o4k5G3b28v6N6nBB2l";
+    public const string ADSCENEID_REVIVE = "p73qSpLci0W9f33264Y";
+    public const string ADSCENEID_GAMEOVER = "iB4KpZwk6BewzJix62e";
 
     static ADManager instance;
     public bool isAdLoaded = false;

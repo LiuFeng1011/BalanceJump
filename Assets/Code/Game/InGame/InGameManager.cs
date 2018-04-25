@@ -173,7 +173,7 @@ public class InGameManager : MonoBehaviour {
         {
             PlayerPrefs.SetInt(GameConst.USERDATANAME_MODEL_MAXSCORES + selmodel, thisscores);
 
-            GameCenterManager.GetInstance().UploadScores("TouchColor_Normal_Leaderboard",thisscores);
+            GameCenterManager.GetInstance().UploadScores("balancejump",thisscores);
         }
         PlayerPrefs.SetInt(GameConst.USERDATANAME_MODEL_LASTSCORES + selmodel, thisscores);
 
