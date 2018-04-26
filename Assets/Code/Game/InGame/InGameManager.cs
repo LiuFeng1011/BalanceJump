@@ -81,8 +81,10 @@ public class InGameManager : MonoBehaviour {
         role = roleObj.GetComponent<InGameRole>();
         role.Init();
 
-        role.transform.position = new Vector3(0, 2f, 0);
+        role.transform.position = new Vector3(0, 0.5f, 0);
         //role.Jump(new Vector3(0f, 1f));
+
+        role.SetCameraPos();
 
         //gameEffectManager = new GameEffectManager();
 
@@ -101,8 +103,6 @@ public class InGameManager : MonoBehaviour {
         inGameColorManager.Init();
 
         //gameState = enGameState.playing;
-
-        int teachCount = PlayerPrefs.GetInt("teachcount", 0);
 
         GameObject teachObj = Resources.Load("Prefabs/UI/TeachLayer") as GameObject;
         teachObj = Instantiate(teachObj);
@@ -190,7 +190,7 @@ public class InGameManager : MonoBehaviour {
     }
     public void StartGame(){
         gameState = enGameState.playing;
-        role.Jump(new Vector3(0f, 1f));
+        role.Jump(new Vector3(0f, 0.8f));
     }
     public void ChangeState(enGameState state){
         gameState = state;
@@ -212,13 +212,18 @@ public class InGameManager : MonoBehaviour {
 
     public void Revive(){
 
-        gameState = enGameState.playing;
+        //gameState = enGameState.playing;
 
         inGameCameraEffect.Show();
         rapidBlurEffectManager.OverBlur();
         role.Revive();
         modelManager.Revive();
+        inGameLevelManager.Revive();
 
+        role.transform.position = new Vector3(0, 0.5f, role.transform.position.z);
+        role.gameObject.SetActive(true);
+        GameObject teachObj = Resources.Load("Prefabs/UI/TeachLayer") as GameObject;
+        teachObj = Instantiate(teachObj);
     }
 
     public void Restart(){

@@ -57,10 +57,10 @@ public class InGameColorManager : BaseGameObject {
 
         objColor1   = Color.HSVToRGB(h, s, v);
 
-        //h += 0.5f;
+        //h += 0.2f;
         //h = h - (int)h;
         s = 0.9f;
-        v = 0.8f;
+        v = 0.7f;
         objColor2   = Color.HSVToRGB(h, s, v);
 
 

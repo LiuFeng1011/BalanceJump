@@ -13,7 +13,7 @@ public class InGameRole : InGameBaseObj {
     public int combo = 0,scores = 0;
     Vector3 moveForce,cameraBasePos;
 
-    float targetz =0 ;
+    public float targetz =0 ;
 
     public AnimationCurve jumpAC;
 
@@ -60,16 +60,20 @@ public class InGameRole : InGameBaseObj {
             float rate = jumpAC.Evaluate(1f - jumpActionTime / maxJumpActionTime);
             transform.localScale = new Vector3(baseScaleX * rate,transform.localScale.y, baseScaleX * rate);
         }
+        SetCameraPos();
+        if(transform.position.y < -6){
+            Die();
+        }
+	}
+
+    public void SetCameraPos(){
 
         Vector3 camerapos = InGameManager.GetInstance().gamecamera.transform.position;
         camerapos.z = cameraBasePos.z + transform.position.z;
 
         InGameManager.GetInstance().gamecamera.transform.position = camerapos;
 
-        if(transform.position.y < -6){
-            Die();
-        }
-	}
+    }
 
     public void AddScore(bool iscombo){
         int addscore = 1;

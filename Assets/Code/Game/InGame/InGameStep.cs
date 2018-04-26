@@ -49,7 +49,7 @@ public class InGameStep : InGameBaseObj {
             }
 
         }
-        transform.position = new Vector3(x, -5 * disrate, transform.position.z);
+        transform.position = new Vector3(x, -2 * disrate, transform.position.z);
 
 
     }

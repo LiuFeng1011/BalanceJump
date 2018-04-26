@@ -6,7 +6,7 @@ public class CreateMesh : MonoBehaviour {
 
     public int meshWidth = 3;
 
-    public float _InvWaveLength = 5;
+    public float waveLength = 5, bigWaveLength = 0.2f;
 
     //定义顶点列表  
     Vector3[] verts;
@@ -52,8 +52,8 @@ public class CreateMesh : MonoBehaviour {
             float x = 0f, y = 0f, z = 0f;
             float rate = pointRate[(int)verts[i].x , (int)verts[i].z];
 
-            y = Mathf.Sin(rate * (time + 100) * 3f) * _InvWaveLength 
-                     + Mathf.Sin((time +(verts[i].x + verts[i].y) * 0.4f) * 2)*0.5f;  
+            y = Mathf.Sin(rate * (time + 100) * 3f) * waveLength 
+                     + Mathf.Sin((time +(verts[i].x + verts[i].y) * 0.4f) * 2)*bigWaveLength;  
             x = verts[i].x + Mathf.Sin(rate * time) * 0.2f;
             z = verts[i].z + Mathf.Sin(rate * time) * 0.2f;
             pl.Add(new Vector3(x,y,z));

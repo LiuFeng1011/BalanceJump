@@ -17,7 +17,7 @@ public class InGameLevelManager : BaseGameObject {
 
         EventManager.Register(this,
                               EventID.EVENT_TOUCH_DOWN, EventID.EVENT_TOUCH_MOVE);
-        addCount = (int)(GameConst.GAME_STEP_INTERVAL * 10);
+        addCount = (int)(GameConst.GAME_STEP_INTERVAL * 7);
 
         addStepDis += GameConst.GAME_STEP_INTERVAL;
         for (int i = 0; i < 1; i++){
@@ -39,11 +39,13 @@ public class InGameLevelManager : BaseGameObject {
         for (int i = 0; i < objList.Count; i++)
         {
             InGameBaseObj obj = objList[i];
-            obj.ObjUpdate();
-
             if (obj.IsDie())
             {
                 delList.Add(obj);
+            }else{
+
+                obj.ObjUpdate();
+
             }
         }
 
@@ -62,6 +64,24 @@ public class InGameLevelManager : BaseGameObject {
         }
     }
 
+    public void Revive()
+    {
+
+        for (int i = 0; i < objList.Count; i++)
+        {
+            InGameBaseObj obj = objList[i];
+
+            if (Mathf.Abs(obj.transform.position.z - (InGameManager.GetInstance().role.targetz + GameConst.GAME_STEP_INTERVAL)) < 0.5f){
+                obj.transform.position = new Vector3(0f, obj.transform.position.y, obj.transform.position.z);
+
+                obj.transform.localScale = new Vector3(4f, obj.transform.localScale.y, obj.transform.localScale.z);
+
+            }else if(Mathf.Abs(obj.transform.position.z - InGameManager.GetInstance().role.targetz) < 0.5f){
+                obj.SetDie();
+            }
+
+        }
+    }
     public InGameBaseObj AddObj(InGameBaseObj.enObjType type){
 
         GameObject obj = Resources.Load(InGameBaseObj.ObjResourceName[(int)type]) as GameObject;
@@ -70,6 +90,7 @@ public class InGameLevelManager : BaseGameObject {
         InGameBaseObj objscript = obj.GetComponent<InGameBaseObj>();
         objList.Add(objscript);
         objscript.Init();
+        objscript.ObjUpdate();
         return objscript;
     }
 
@@ -95,6 +116,7 @@ public class InGameLevelManager : BaseGameObject {
 
     }
 
+
     public void Destroy(){
         
     }
@@ -115,9 +137,9 @@ public class InGameLevelManager : BaseGameObject {
     }
 
     public void TouchMove(Vector3 pos){
-        float rate =  - (pos.x - Screen.width / 2) / 500f;
-        if (rate > 1) rate = 1;
-        if (rate < -1) rate = -1;
+        float rate =  - (pos.x - Screen.width / 2) / 300f;
+        if (rate > 1.5f) rate = 1.5f;
+        if (rate < -1.5f) rate = -1.5f;
 
         float rotate = rate * 45;
 
